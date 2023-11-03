@@ -12,27 +12,8 @@ using std::endl;
 #define PAGE_SIZE 4096
 #define CACHE_LINE_SIZE 64
 #define NODE_SIZE 1620
-static inline void * my_align_malloc(size_t align, size_t size)
-{
-	void * ptr;
-	// LINUX
-	int ret = posix_memalign(&ptr, align, size);
-	if (ret != 0) {
-
-		abort();
-	}
-	
-//	ptr = _aligned_malloc(size, align);
-
-	return ptr;
-}
-
-static inline void  my_align_free(void * ptr)
-{
-	// LINUX
-	free(ptr);
-	//_aligned_free(ptr);
-}
+extern void *my_align_malloc(size_t align, size_t size);
+extern void my_align_free(void *ptr);
 
 
 enum State { empty, set, handled}; // enum  is int we want something smaller as char
